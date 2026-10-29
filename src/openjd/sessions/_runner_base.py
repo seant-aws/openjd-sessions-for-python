@@ -19,7 +19,7 @@ from tempfile import mkstemp
 
 from openjd.model import SymbolTable
 from openjd.model import FormatStringError
-from openjd.model import evaluate_let_bindings
+from openjd.model import evaluate_bindings
 
 from openjd.model.v2023_09 import Action as Action_2023_09
 from openjd.model.v2023_09 import CancelationMethodDeferred as CancelationMethodDeferred_2023_09
@@ -528,7 +528,7 @@ def apply_let_bindings(*, symtab: SymbolTable, let_bindings: list[str]) -> None:
             )
     # Single-sourced in openjd.model (parse-memoized; skips malformed
     # bindings; raises ValueError naming the failing binding).
-    evaluate_let_bindings(symtab=symtab, let_bindings=let_bindings)
+    evaluate_bindings(symtab=symtab, let_bindings=let_bindings)
 
 
 class ScriptRunnerBase(ABC):
