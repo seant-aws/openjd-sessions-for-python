@@ -1,3 +1,10 @@
+## 0.15.0 (2026-11-04)
+
+
+### Features
+* Require openjd-model 0.15 ([`618cb3d`](https://github.com/seant-aws/openjd-sessions-for-python/commit/618cb3d0e7f0c50dad910268dc94394897c5a939))
+
+
 ## 0.14.0 (2026-10-20)
 
 
