@@ -164,11 +164,20 @@ class PathMappingRule:
             raise ValueError("Empty path mapping rule")
 
         field_names = [field.name for field in fields(PathMappingRule)]
-        for name in field_names:
-            if name not in rule:
-                raise ValueError(f"Path mapping rule requires the following fields: {field_names}")
+        missing = [name for name in field_names if name not in rule]
+        if missing:
+            raise ValueError(
+                f"Path mapping rule requires the following fields: {field_names}; missing: {missing}"
+            )
 
-        source_path_format = PathFormat(rule["source_path_format"].upper())
+        try:
+            source_path_format = PathFormat(rule["source_path_format"].upper())
+        except ValueError:
+            valid = ", ".join(f.value for f in PathFormat)
+            raise ValueError(
+                f"Path mapping rule {rule['source_path_format']!r} is not a valid "
+                f"source_path_format; use one of {valid}"
+            ) from None
         source_path: Union[PurePath, str]
         if source_path_format == PathFormat.POSIX:
             source_path = PurePosixPath(rule["source_path"])
