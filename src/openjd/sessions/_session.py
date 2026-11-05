@@ -536,7 +536,7 @@ class Session(object):
             self._files_dir = self._create_files_directory()
         except RuntimeError as exc:
             self._logger.error(
-                f"ERROR creating Session Working Directory: {str(exc)}",
+                f"Could not create the working directories of Session {self._session_id}: {str(exc)}",
                 extra=LogExtraInfo(
                     openjd_log_content=LogContent.COMMAND_OUTPUT | LogContent.FILE_PATH
                 ),
