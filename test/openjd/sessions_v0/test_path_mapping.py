@@ -536,6 +536,25 @@ class TestPathMapping:
         with pytest.raises(ValueError):
             PathMappingRule.from_dict(dict_rule)
 
+    def test_from_dict_names_the_missing_fields(self) -> None:
+        with pytest.raises(ValueError, match=r"missing: \['source_path'\]"):
+            PathMappingRule.from_dict(
+                {"source_path_format": "POSIX", "destination_path": "/mnt/newprefix"}
+            )
+
+    def test_from_dict_names_the_valid_source_path_formats(self) -> None:
+        with pytest.raises(
+            ValueError,
+            match=r"'WINDOWS10' is not a valid source_path_format; use one of POSIX, WINDOWS, URI",
+        ):
+            PathMappingRule.from_dict(
+                {
+                    "source_path_format": "WINDOWS10",
+                    "source_path": "C:\\oldprefix",
+                    "destination_path": "c:\\newprefix",
+                }
+            )
+
 
 class TestUriPathMapping:
     """RFC 0006 §2.3.2 (EXPR): URI-form source paths.
