@@ -1,3 +1,10 @@
+## 0.15.1 (2026-11-05)
+
+
+### Bug Fixes
+* The error logged when a Session cannot create its working or files directory now names the session: `Could not create the working directories of Session <id>: <error>` (#22)
+
+
 ## 0.15.0 (2026-11-04)
 
 
