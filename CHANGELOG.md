@@ -1,3 +1,14 @@
+## 0.15.0 (2026-11-05)
+
+
+### BREAKING CHANGES
+* openjd-model 0.15 is now required (`openjd-model >= 0.15,< 0.16`); upgrade openjd-model alongside this release (#20)
+
+### Bug Fixes
+* Path mapping rule errors now name the missing field, and an unknown `source_path_format` lists the valid formats instead of raising a bare enum error (#24)
+* A Session that cannot create its working or files directory now logs `Could not create the working directories of Session <id>: <error>`, naming the session (#22)
+
+
 ## 0.15.1 (2026-11-05)
 
 
