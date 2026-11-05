@@ -477,7 +477,9 @@ class TestSessionInitialization:
             method_mock.side_effect = RuntimeError("Permission denied")
             session_id = uuid.uuid4().hex
             job_params = {"foo": ParameterValue(type=ParameterValueType.STRING, value="bar")}
-            expected_error = "ERROR creating Session Working Directory: Permission denied"
+            expected_error = (
+                f"Could not create the working directories of Session {session_id}: Permission denied"
+            )
 
             # WHEN
             with pytest.raises(RuntimeError):
