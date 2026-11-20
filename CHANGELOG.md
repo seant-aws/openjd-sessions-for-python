@@ -1,3 +1,10 @@
+## 0.15.0 (2026-11-20)
+
+
+### BREAKING CHANGES
+* openjd-sessions now requires openjd-model 0.16 (>= 0.16, < 0.17); previously it required 0.14. If your project pins openjd-model, update it to 0.16.x before you upgrade openjd-sessions. (#28)
+
+
 ## 0.14.0 (2026-10-20)
 
 
