@@ -19,7 +19,7 @@ from tempfile import mkstemp
 
 from openjd.model import SymbolTable
 from openjd.model import FormatStringError
-from openjd.model import evaluate_let_bindings
+from openjd.model import apply_let_bindings as _model_apply_let_bindings
 
 from openjd.model.v2023_09 import Action as Action_2023_09
 from openjd.model.v2023_09 import CancelationMethodDeferred as CancelationMethodDeferred_2023_09
@@ -516,8 +516,8 @@ def apply_let_bindings(*, symtab: SymbolTable, let_bindings: list[str]) -> None:
             parse safely (see MAX_LET_BINDING_LENGTH).
     """
     # R4-1 fix: Guard against SIGBUS crash from parser stack overflow. Check
-    # length BEFORE calling evaluate_let_bindings, because the crash happens
-    # in native code with no exception — the process just dies.
+    # length BEFORE calling openjd.model's apply_let_bindings, because the
+    # crash happens in native code with no exception — the process just dies.
     for binding in let_bindings:
         if len(binding) > MAX_LET_BINDING_LENGTH:
             # Truncate the binding text in the error message, since it may be
@@ -528,7 +528,7 @@ def apply_let_bindings(*, symtab: SymbolTable, let_bindings: list[str]) -> None:
             )
     # Single-sourced in openjd.model (parse-memoized; skips malformed
     # bindings; raises ValueError naming the failing binding).
-    evaluate_let_bindings(symtab=symtab, let_bindings=let_bindings)
+    _model_apply_let_bindings(symtab=symtab, let_bindings=let_bindings)
 
 
 class ScriptRunnerBase(ABC):
